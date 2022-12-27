@@ -1,35 +1,49 @@
 package com.insta.app
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.insta.app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var mBinding: ActivityMainBinding
+    private lateinit var mTitle: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
-        val navView: BottomNavigationView = binding.navView
+        mTitle = mBinding.title
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        val mNavView: BottomNavigationView = mBinding.navView
+        mNavView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_home -> {
+                    mTitle.setText("Home")
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_search -> {
+                    mTitle.setText("Search")
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_add_post -> {
+                    mTitle.setText("Add Post")
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_notification -> {
+                    mTitle.setText("Favourite")
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_profile -> {
+                    mTitle.setText("Profile")
+                    return@setOnItemSelectedListener true
+                }
+            }
+            false
+        }
     }
 }
