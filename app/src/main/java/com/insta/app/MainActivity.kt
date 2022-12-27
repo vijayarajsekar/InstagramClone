@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
      * Variable Declaration
      */
     private lateinit var mBinding: ActivityMainBinding
-    internal var mSelectedFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,36 +30,41 @@ class MainActivity : AppCompatActivity() {
         mNavView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
-                    mSelectedFragment = HomeFragment()
+                    moveToFragment(HomeFragment())
+                    return@setOnItemSelectedListener true
                 }
                 R.id.navigation_search -> {
-                    mSelectedFragment = SearchFragment()
+                    moveToFragment(SearchFragment())
+                    return@setOnItemSelectedListener true
                 }
                 R.id.navigation_add_post -> {
-                    mSelectedFragment = NotificationsFragment()
+                    moveToFragment(HomeFragment())
+                    return@setOnItemSelectedListener true
                 }
                 R.id.navigation_notification -> {
-                    mSelectedFragment = NotificationsFragment()
+                    moveToFragment(NotificationsFragment())
+                    return@setOnItemSelectedListener true
                 }
                 R.id.navigation_profile -> {
-                    mSelectedFragment = ProfileFragment()
+                    moveToFragment(ProfileFragment())
+                    return@setOnItemSelectedListener true
                 }
             }
-
-            /**
-             * Setting selected fragment as per the click
-             */
-            if (mSelectedFragment != null)
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view, mSelectedFragment!!).commit()
-
             false
         }
 
         /**
          * Setting Default page as HomeScreenFragment
          */
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, HomeFragment()).commit()
+        moveToFragment(HomeFragment())
+    }
+
+    /**
+     * Moving into relevant Fragment
+     */
+    private fun moveToFragment(fragment: Fragment) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container_view, fragment)
+        fragmentTransaction.commit()
     }
 }
