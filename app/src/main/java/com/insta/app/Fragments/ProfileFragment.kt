@@ -30,10 +30,47 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         mRootView = FragmentProfileBinding.inflate(inflater, container, false)
-        mRootView.btnEditProfile.setOnClickListener {
-            startActivity(Intent(context, AccountSettingsActivity::class.java))
-        }
+        mRootView.btnEditProfile.setOnClickListener { it ->
+            val getButtonText = mRootView.btnEditProfile.text
 
+            when {
+                getButtonText == "Edit profile" -> startActivity(
+                    Intent(
+                        context,
+                        AccountSettingsActivity::class.java
+                    )
+                )
+
+                getButtonText == "Follow" -> {
+                    mFireBaseUser?.uid.let { it ->
+                        FirebaseDatabase.getInstance().reference.child("Follow")
+                            .child(it.toString())
+                            .child("Following").child(mProfileId).setValue(true)
+                    }
+
+                    mFireBaseUser?.uid.let { it ->
+                        FirebaseDatabase.getInstance().reference.child("Follow")
+                            .child(mProfileId)
+                            .child("Followers").child(it.toString()).setValue(true)
+                    }
+                }
+
+                getButtonText == "Following" -> {
+                    mFireBaseUser?.uid.let { it ->
+                        FirebaseDatabase.getInstance().reference.child("Follow")
+                            .child(it.toString())
+                            .child("Following").child(mProfileId).removeValue()
+                    }
+
+                    mFireBaseUser?.uid.let { it ->
+                        FirebaseDatabase.getInstance().reference.child("Follow")
+                            .child(mProfileId)
+                            .child("Followers").child(it.toString()).removeValue()
+                    }
+                }
+
+            }
+        }
         mFireBaseUser = FirebaseAuth.getInstance().currentUser!!
 
         val pref = context?.getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
@@ -130,6 +167,7 @@ class ProfileFragment : Fragment() {
                         .into(mRootView.imageProfile)
 
                     mRootView.textProfileFullname.text = user.fullname
+                    mRootView.textProfileUname.text = user.username
                     mRootView.textProfileBio.text = user.bio
                 }
 

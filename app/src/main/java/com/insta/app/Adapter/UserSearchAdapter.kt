@@ -70,7 +70,6 @@ class UserSearchAdapter(
                                         .addOnCompleteListener { task ->
                                             if (task.isSuccessful) {
 
-
                                             }
                                         }
                                 }
