@@ -17,6 +17,8 @@
         android:layout_height="120dp"
         android:layout_margin="10dp"
         android:padding="5dp"
+        app:civ_border_color="@color/colorPrimaryTrans"
+        app:civ_border_width="3dp"
         android:src="@drawable/profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

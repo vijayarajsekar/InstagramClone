@@ -6,4 +6,5 @@
     <color name="colorAccent">#FF68A5</color>
     <color name="colorBlack">#C2BDBF</color>
     <color name="colorBlue">#5552FF</color>
+    <color name="colorPrimaryTrans">#805C32C7</color>
 </resources>
