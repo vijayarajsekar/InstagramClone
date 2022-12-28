@@ -110,8 +110,8 @@ class SignUpActivity : AppCompatActivity() {
 
         val mCurrentUserMap = HashMap<String, Any>()
         mCurrentUserMap["uid"] = mCurrenntUserId
-        mCurrentUserMap["fullname"] = fname
-        mCurrentUserMap["username"] = uname
+        mCurrentUserMap["fullname"] = fname.lowercase()
+        mCurrentUserMap["username"] = uname.lowercase()
         mCurrentUserMap["email"] = email
         mCurrentUserMap["bio"] = "I am using Insta Clone App."
         mCurrentUserMap["image"] = "gs://instaclone-cc711.appspot.com/Default Images/profile.png"
