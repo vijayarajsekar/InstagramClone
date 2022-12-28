@@ -205,6 +205,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
                 android:orientation="horizontal"
+                android:layout_margin="5dp"
                 android:padding="12dp">
 
                 <ImageButton

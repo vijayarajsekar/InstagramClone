@@ -1,12 +1,14 @@
 package com.insta.app.Adapter
 
 import android.content.Context
+import android.provider.ContactsContract.Profile
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -14,6 +16,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.insta.app.Fragments.ProfileFragment
 import com.insta.app.Models.UserSearchModel
 import com.insta.app.R
 import com.squareup.picasso.Picasso
@@ -43,6 +46,15 @@ class UserSearchAdapter(
         Picasso.get().load(userItem.image).placeholder(R.drawable.profile).into(holder.userImage)
 
         checkFollowingStatus(userItem.uid, holder.userFollow)
+
+        holder.itemView.setOnClickListener{
+         val mPref = ctx.getSharedPreferences("USER_PREF", Context.MODE_PRIVATE).edit()
+            mPref.putString("profileId", userItem.uid).apply()
+
+            (ctx as FragmentActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view,ProfileFragment()).commit()
+
+        }
 
         holder.userFollow.setOnClickListener {
             if (holder.userFollow.text.toString().equals("Follow")) {
