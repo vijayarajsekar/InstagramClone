@@ -200,7 +200,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@drawable/button_black_background"
                 android:orientation="horizontal"
                 android:padding="12dp">
 
