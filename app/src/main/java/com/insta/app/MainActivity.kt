@@ -1,5 +1,6 @@
 package com.insta.app
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -38,8 +39,13 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_add_post -> {
-                    moveToFragment(HomeFragment())
-                    return@setOnItemSelectedListener true
+                    it.isChecked = false
+                    startActivity(
+                        Intent(
+                            this@MainActivity,
+                            AddPostActivity::class.java
+                        )
+                    )
                 }
                 R.id.navigation_notification -> {
                     moveToFragment(NotificationsFragment())

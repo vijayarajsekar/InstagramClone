@@ -250,12 +250,9 @@ class AccountSettingsActivity : AppCompatActivity() {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE
             && resultCode == Activity.RESULT_OK && data != null
         ) {
-
             val mResult = CropImage.getActivityResult(data)
             mImageUri = mResult.uri
             mBinding.profileImageAccount.setImageURI(mImageUri)
         }
     }
-
-
 }
