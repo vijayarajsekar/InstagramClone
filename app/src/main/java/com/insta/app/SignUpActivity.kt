@@ -126,6 +126,11 @@ class SignUpActivity : AppCompatActivity() {
                     "Account has been created successfully",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                FirebaseDatabase.getInstance().reference.child("Follow").child(mCurrenntUserId)
+                    .child("Following").child(mCurrenntUserId)
+                    .setValue(true)
+
                 startActivity(
                     Intent(
                         this@SignUpActivity,

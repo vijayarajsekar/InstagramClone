@@ -192,7 +192,7 @@ class AccountSettingsActivity : AppCompatActivity() {
             ).show()
 
             else -> {
-                mProgressDialog.show()
+                mProgressDialog?.show()
                 val fileRef = mProfileStorageRef!!.child(mFireBaseUser!!.uid + ".jpg")
                 val uploadImageTask: StorageTask<*>
                 uploadImageTask = fileRef.putFile(mImageUri!!)

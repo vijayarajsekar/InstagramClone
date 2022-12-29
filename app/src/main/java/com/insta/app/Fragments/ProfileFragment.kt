@@ -21,7 +21,7 @@ import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
 
-    lateinit var mRootView: FragmentProfileBinding
+    private lateinit var mRootView: FragmentProfileBinding
     private lateinit var mProfileId: String
     private lateinit var mFireBaseUser: FirebaseUser
     override fun onCreateView(
@@ -139,7 +139,6 @@ class ProfileFragment : Fragment() {
         val mFollowersRef =
             FirebaseDatabase.getInstance().reference.child("Follow").child(mProfileId)
                 .child("Following")
-
 
         mFollowersRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
