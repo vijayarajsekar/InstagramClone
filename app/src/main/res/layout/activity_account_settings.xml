@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appbar_profile" />
 
     <TextView
-        android:id="@+id/text_image_btn"
+        android:id="@+id/text_change_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -83,7 +83,7 @@
         android:layout_marginRight="16dp"
         android:hint="Full name"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/text_image_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/text_change_image" />
 
     <EditText
         android:id="@+id/edit_bio_username"
